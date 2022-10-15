@@ -10,12 +10,12 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <script>Vue.config.productionTip= false </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
-        body{
-            background-image: url("3.jpg");
+        body
+        {
+            background-image: url("img/3.jpg");
             min-height: 400px;
             width: auto;
             object-fit: cover;
@@ -27,29 +27,41 @@
 </head>
 
 <body>
-    <div id = "loginFrame" class="shadow-lg p-3 mb-5" style="border-radius: 20px; width: 50%; height: auto; background-color: rgb(206, 199, 255); position:absolute;  left:50%;  top:50%;  margin:-25% 0 0 -25%;border-width: 3px;border-color: coral;">
+    <div id = "loginFrame" class="shadow-lg p-3 mb-5" style="position:absolute;left: 50%;top: 30%;margin: -100px 0 0 -225px;border-radius: 10px; width: 400px; height: 450px; background-color: rgb(255, 255, 255); border-width: 3px;border-color: coral;">
         <form class="form-signin">
-            <img class="mb-4" src="logo.jpg" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal " style="color: white;"><strong>请登录 [用户名使用游戏内ID或注册时邮箱]</strong></h1>
+            <img class="mb-4" src="img/logo.jpg" alt="" width="72" height="72">
+            <span><a style="font-size: 20px;"><strong>梦想之都官网登录/游戏内注册</strong></a></span>
+            <h1 class="h5 mb-3" style="color: rgb(0, 0, 0);"><strong></strong></h1>
             <label for="inputEmail" class="sr-only">Username</label>
-            <input v-model="userInfo.username" type="email" id="inputEmail" class="form-control" placeholder="邮箱/游戏内用户名" required autofocus style="margin-bottom: 25px;">
+            <input v-model="userInfo.username" type="email" id="inputEmail" class="form-control" placeholder="注册时邮箱/服务器ID" required autofocus style="margin-bottom: 25px;">
             <label for="inputPassword" class="sr-only">Password</label>
             <input v-model="userInfo.password" type="password" id="inputPassword" class="form-control" placeholder="密码" required>
+
             <div class="checkbox mb-3" style="margin-top: 10px;">
               <label>
                 <input type="checkbox" value="remember-me"> 记住我
               </label>
+              <label>
+                <a style="float: right;" href="index.html">->快速注册服务器账号</a>
+              </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit" style="opacity:0.8;width: 50%;margin: 10 auto;" @click = "demo">登录</button>
-            <button class="btn btn-lg btn-warning btn-block" type="submit" style="opacity:0.8;width: 50%;margin: 10 auto;">注册</button>
-            <p class="mt-5 mb-3 " style="color: yellow;"><strong>&copy; 2015 - 2022</strong></p>
+            <p class="mt-5 mb-3 " style="color: rgb(0, 0, 0);"><strong>&copy; 2015 - 2022</strong></p>
         </form>
     </div>
 </body>
 
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        console.log("gg");
+        $("#loginFrame").fadeIn();
+    });
+
+</script>
 
 <script type="text/javascript">
-    Vue.config.productionTip = false
+    Vue.config.productionTip= false;
 
     new Vue({
         el: '#loginFrame',
@@ -81,6 +93,7 @@
                 })
             }
         }
-    })
+    });
+
 </script>
 </html>

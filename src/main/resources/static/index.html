@@ -23,10 +23,9 @@
 </head>
 
 <body style="background-color: rgb(36, 36, 36);">
-
   <div class="HeadNav">
     <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
-      <a class="navbar-brand" href="#"><img src="logo.jpg" class="img-circle" alt="Logo" style="width:50px;vertical-align: middle;"></a>
+      <a class="navbar-brand" href="#"><img src="img/logo.jpg" class="img-circle" alt="Logo" style="width:50px;vertical-align: middle;"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -52,66 +51,80 @@
     </nav>
   </div>
 
-  <div class = "HeadImg" style="border-bottom: 6px solid orange;">
+  <div class = "HeadImg" style="border-bottom: 6px solid orange; height: auto;">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
+        <div style="z-index: 2;position: absolute;top: 30%; left: 0;right: 0; bottom: 0;height: 200px; width: 50%;float: none; margin-left: auto;margin-right: auto;">
 
-        <div style="z-index: 2;position: absolute;top: 30%; left: 0;right: 0; bottom: 0;">
           <a class= "text-center" style="font-size: 36px; color: rgb(255, 255, 255); display: block;"><strong>梦想之都 - 14周目</strong></a>
           <a class= "text-center" style="font-size: 24px; color: white; display: block;">原版生电-红石-生存-养老服务器</a>
 
-          <div class="container">
-            <div class="row" style="vertical-align: middle;">
+          <div class="container" style="margin-top: 50px;">
+            <div class="row">
               <div class="col-md-6">
-                <button type="button" class="btn btn-warning" style="display:block; margin: 10px auto; width: 40% ;height: 50px; background-color: rgb(0, 194, 248); border-radius: 50px;color: aliceblue; border-width: 3px;">客户端下载</button>
+                <button type="button" class="btn btn-outline-warning" style=" display:block; width: 80% ;height: 50px; border-radius: 20px; color: aliceblue; border-width: 3px; background-color: gray; float: none;margin-left: auto;margin-right: auto;"><strong>客户端下载</strong></button>
               </div>
               <div class="col-md-6">
-                <button type="button" class="btn btn-warning" style="display:block; margin: 10px auto; width: 40% ;height: 50px; background-color: rgb(0, 194, 248); border-radius: 50px;color: aliceblue; border-width: 3px;">了解更多</button>
+                <button type="button" class="btn btn-outline-warning" style="display:block; width: 80% ;height: 50px; border-radius: 20px; color: aliceblue; border-width: 3px; background-color: gray; float: none;margin-left: auto;margin-right: auto;"><strong>了解更多</strong></button>
               </div>
             </div>
           </div>
         </div>
 
         <div class="carousel-item active">
-            <img src="1.jpg" class="d-block w-100 needScale" alt="..." style="min-height: 400px;width: auto;object-fit: cover;vertical-align: middle;">
+            <img src="img/1.jpg" class="d-block w-100 needScale" alt="..." style="min-height: 400px;width: auto;object-fit: cover;vertical-align: middle;">
         </div>
       </div>
     </div>
   </div>
 
-  <div id = "Tips1" style=" width: 100%;border-bottom: 6px solid orange;" >
+  <div id = "Tips1" style=" width: 100%; border-bottom: 6px solid orange;" >
     <div style="height: auto; background-color: rgb(255, 245, 231);">
-      <div class="container" style="vertical-align: middle;padding-top: 35px;padding-bottom: 35px;">
-        <div class="row">
-          <div class="col-md-4 intro-feature " style="border-width: 3px;border-color: aqua;">
-            <div class="intro-icon">
-              <span class="glyphicon glyphicon-cloud"></span>
-            </div>
-            <div class="intro-content">
-              <h5>负载均衡</h5>
-              <p>为了服务器的稳定以及流畅，我们采用了 Dell 高性能独立服务器来运行整个游戏，平衡了各服务器间的运行效率。</p>
+      <div class="temp" style="padding-top: 35px;padding-bottom: 35px; margin: 0;">
+        <div class="row no-gutters">
+
+          <div class="col-md-4">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <img class = "needScale" src="img/server.png" style="width: 50%; height: auto; float:right;">
+                </div>
+                <div class="col-md-6">
+                  <h5><strong>负载均衡</strong></h5>
+                  <p>为了服务器的稳定以及流畅，我们采用了i9-12900KS作为服务器处理器，平衡了各服务器间的运行效率。</p>
+                </div>
+              </div>
             </div>
           </div>
   
           <div class="col-md-4" >
-            <div class="intro-icon">
-              <span class="glyphicon glyphicon-cloud intro-feature"></span>
-            </div>
-            <div class="intro-content">
-              <h5>实力团队</h5>
-              <p>梦想之都拥有着一个多人的技术团队，来运营整个服务器，每个人都是数一数二的能手，保障了服务器的持续发展。</p>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <img class = "needScale" src="img/workers.png" style="width: 50%; height: auto; float:right;">
+                </div>
+                <div class="col-md-6">
+                  <h5>实力团队</h5>
+                  <p>梦想之都拥有着一个多人的技术团队，来运营整个服务器，每个人都是数一数二的能手，保障了服务器的持续发展。</p>
+                </div>
+              </div>
             </div>
           </div>
             
           <div class="col-md-4">
-            <div class="intro-icon">
-              <span class="glyphicon glyphicon-cloud intro-feature"></span>
-            </div>
-            <div class="intro-content">
-              <h5>永久在线</h5>
-              <p>服务器有着先进的热重启功能，保证 7*24 小时不间断运行，整个机组使用 BGP 高防 IP，G 口带宽，一切都是那么的安全。</p>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <img class = "needScale" src="img/support.png" style="width: 50%; height: auto; float:right;">
+                </div>
+                <div class="col-md-6">
+                  <h5>永久在线</h5>
+                  <p>服务器有着先进的热重启功能，保证 7*24 小时不间断运行，整个机组使用 BGP 高防 IP，G 口带宽，一切都是那么的安全。</p>
+                </div>
+              </div>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
@@ -127,16 +140,16 @@
       <div class="row">
 
         <div class="col-md-3">
-          <img src="Mu_Snow.png" class="needScale" alt="..." style="width: 200px;height: 600px; object-fit: cover; vertical-align: middle;">
+          <img src="img/Mu_Snow.png" class="needScale" alt="..." style="width: 200px;height: 600px; object-fit: cover; vertical-align: middle;">
         </div>
         <div class="col-md-3">
-          <img src="Mu_Snow.png" class="needScale" alt="..." style="width: 200px;height: 600px; object-fit: cover; vertical-align: middle;">
+          <img src="img/Mu_Snow.png" class="needScale" alt="..." style="width: 200px;height: 600px; object-fit: cover; vertical-align: middle;">
         </div>
         <div class="col-md-3">
-          <img src="Mu_Snow.png" class="needScale" alt="..." style="width: 200px;height: 600px; object-fit: cover; vertical-align: middle;">
+          <img src="img/Mu_Snow.png" class="needScale" alt="..." style="width: 200px;height: 600px; object-fit: cover; vertical-align: middle;">
         </div>
         <div class="col-md-3">
-          <img src="Mu_Snow.png" class="needScale" alt="..." style="width: 200px;height: 600px; object-fit: cover; vertical-align: middle;">
+          <img src="img/Mu_Snow.png" class="needScale" alt="..." style="width: 200px;height: 600px; object-fit: cover; vertical-align: middle;">
         </div>
         
       </div>

@@ -13,11 +13,16 @@ repositories {
 }
 
 dependencies {
+    implementation files('libs\\MqttJavaLib.jar')
+
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // https://mvnrepository.com/artifact/de.mhus.ports/ports-javaxmail
+    implementation group: 'de.mhus.ports', name: 'ports-javaxmail', version: '7.2.0'
+
 }
 
 tasks.named('test') {

@@ -1,0 +1,266 @@
+<html>
+
+<head>
+    <title>梦想之都网站</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://v-cn.vaptcha.com/v3.js"></script>
+    <style>
+        body
+        {
+            background-image: url("img/3.jpg");
+            min-height: 400px;
+            width: auto;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+    </style>
+
+    
+</head>
+
+<body>
+    <div id = "loginFrame" class="shadow-lg p-3 mb-5" style="position:absolute;left: 50%;top: 30%;margin: -250px 0 0 -300px;border-radius: 10px; width: 600px; height: 850px; background-color: rgb(255, 255, 255); border-width: 3px;border-color: coral;">
+        <form class="form-signin" action="" method="post" target="the_iframe">
+            <img class="mb-4" src="img/logo.jpg" alt="" width="72" height="72">
+            <span><a style="font-size: 20px;"><strong>梦想之都服务器注册</strong><a></span>
+            <h1 class="h5 mb-3" style="color: rgb(0, 0, 0);"><strong></strong></h1>
+
+            <label for="inputEmail" class="sr-only">Username</label>
+            <input v-model="RegisterFormData.username" type="text" class="form-control" placeholder="服务器内游戏ID" autofocus style="margin-bottom: 25px;">
+
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input v-model="RegisterFormData.email" type="email" class="form-control" placeholder="绑定邮箱" autofocus style="margin-bottom: 25px;">
+
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input v-model="RegisterFormData.password" type="password" class="form-control" placeholder="密码" style="margin-bottom: 25px;">
+
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input v-model="RegisterFormData.passwordconfirm" type="password" class="form-control" placeholder="再输入一次密码确认" style="margin-bottom: 25px;">
+
+            
+            <input v-model="RegisterFormData.VerifyCode" type="text" class="form-control" placeholder="邮箱验证码" style="display: inline; width: 50%;margin-bottom: 25px;">
+
+            <span style="float: right;"> <button id = "sendVerifyCode" class="btn btn-primary" v-if = "SendMailBtnClickable" @click="OnSendMailVerifyCodeBtnClicked">发送验证码到邮箱</button> </span>
+            <span style="float: right;"> <button id = "sendVerifyCode" class="btn btn-primary" disabled v-if = "!SendMailBtnClickable" @click="OnSendMailVerifyCodeBtnClicked" >{{content}}</button> </span>
+            
+            <textarea v-model="RegisterFormData.WhiteListReson" class="form-control" rows="5" placeholder="1.注意！&#13;&#10;2.白名单验证陈述，注册提交后由官方群内管理员审核即可通过注册...&#13;&#10;3.在等待验证过程中，请务必加入官方群内&#13;&#10;4.官方群号:471621813"></textarea>
+
+            <button class="btn btn-lg btn-warning btn-block" type="submit" style="opacity:0.8;width: 50%;margin: 60px auto;" @click = "demo">注册</button>
+
+            <p class="mt-5 mb-3 " style="color: rgb(0, 0, 0);"><strong>&copy; 2015 - 2022</strong></p>
+
+        </form>
+        
+        <iframe id="is_iframe" name="the_iframe" style="display:none;"></iframe>
+    </div>
+</body>
+
+<script type="text/javascript">
+
+    function SendMailCode(email)
+    {
+        let param = new URLSearchParams();
+        param.append('email', email)
+        axios({
+            method: 'post',
+            url: '/sendMailCode',
+            data: param,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(res){
+            commonUtil.message("发送成功!");
+        }).catch(function(error){
+            console.log(error)
+        })
+    }
+
+
+    var commonUtil = {
+    /**
+     * 弹出消息框
+     * @param msg 消息内容
+     * @param type 消息框类型（参考bootstrap的alert）
+     */
+    alert: function(msg, type){
+        if(typeof(type) =="undefined") { // 未传入type则默认为success类型的消息框
+            type = "success";
+        }
+        // 创建bootstrap的alert元素
+        var divElement = $("<div></div>").addClass('alert').addClass('alert-'+type).addClass('alert-dismissible');
+        divElement.css({ // 消息框的定位样式
+            "position": "absolute",
+            "top": "80px",
+            "left": "50%",
+            "transform":"-40px 0 0 0"
+        });
+        divElement.text(msg); // 设置消息框的内容
+        // 消息框添加可以关闭按钮
+        var closeBtn = $('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
+        $(divElement).append(closeBtn);
+        // 消息框放入到页面中
+        $('body').append(divElement);
+        return divElement;
+    },
+    
+    /**
+     * 短暂显示后上浮消失的消息框
+     * @param msg 消息内容
+     * @param type 消息框类型
+     */
+    message: function(msg, type) {
+        var divElement = commonUtil.alert(msg, type); // 生成Alert消息框
+        var isIn = false; // 鼠标是否在消息框中
+        
+        divElement.on({ // 在setTimeout执行之前先判定鼠标是否在消息框中
+        　　mouseover : function(){isIn = true;},
+        　　mouseout  : function(){isIn = false;}
+        });
+ 
+        // 短暂延时后上浮消失
+        setTimeout(function() {
+            var IntervalMS = 20; // 每次上浮的间隔毫秒
+            var floatSpace = 60; // 上浮的空间(px)
+            var nowTop = divElement.offset().top; // 获取元素当前的top值
+            var stopTop = nowTop - floatSpace;    // 上浮停止时的top值
+            divElement.fadeOut(IntervalMS * floatSpace); // 设置元素淡出
+            
+            var upFloat = setInterval(function(){ // 开始上浮
+                if (nowTop >= stopTop) { // 判断当前消息框top是否还在可上升的范围内
+                    divElement.css({"top": nowTop--}); // 消息框的top上升1px
+                } else {
+                    clearInterval(upFloat); // 关闭上浮
+                    divElement.remove();    // 移除元素
+                }
+            }, IntervalMS);
+ 
+            if (isIn) { // 如果鼠标在setTimeout之前已经放在的消息框中，则停止上浮
+                clearInterval(upFloat);
+                divElement.stop();
+            }
+            
+            divElement.hover(function() { // 鼠标悬浮时停止上浮和淡出效果，过后恢复
+                clearInterval(upFloat);
+                divElement.stop();
+            },function() {
+                divElement.fadeOut(IntervalMS * (nowTop - stopTop)); // 这里设置元素淡出的时间应该为：间隔毫秒*剩余可以上浮空间
+                upFloat = setInterval(function(){ // 继续上浮
+                    if (nowTop >= stopTop) {
+                        divElement.css({"top": nowTop--});
+                    } else {
+                        clearInterval(upFloat); // 关闭上浮
+                        divElement.remove();    // 移除元素
+                    }
+                }, IntervalMS);
+                });
+            }, 1500);
+        }
+    }
+
+    var vm = new Vue({
+        el: '#loginFrame',
+        data: {
+            RegisterFormData: {
+                username: '',
+                password: '',
+                passwordconfirm: '',
+                email: '',
+                VerifyCode: '',
+                WhiteListReson: '',
+            },
+            SendMailBtnClickable: true,
+            SendMailVerifyCodeCoolDowm: 60,
+            timer: null,
+            content: "60s后重新获取",
+            vaptchaObj: null,
+            vapisPass: false
+        },
+        created: function () {
+            vaptcha({
+                vid: '634a97cacdf7d074d80a41aa',
+                mode: 'invisible',
+                scene: 0,
+                area: 'auto',
+            }).then(function (VAPTCHAWindows) {
+                vm.vaptchaObj = VAPTCHAWindows;
+                vm.vaptchaObj.listen('pass', function () {
+                    vm.vapisPass = true;
+                    SendMailCode(vm.RegisterFormData.email);
+
+                    VAPTCHAWindows.reset();
+                })
+            })
+        },
+        methods: {
+            demo() {
+                let param = new URLSearchParams()
+
+                param.append('username', this.RegisterFormData.username)
+                param.append('password', this.RegisterFormData.password)
+                param.append('email', this.RegisterFormData.email)
+                param.append('VerifyCode', this.RegisterFormData.VerifyCode)
+                param.append('whitelist', this.RegisterFormData.whitelist)
+
+                axios({
+                    method: 'post',
+                    url: '/reg',
+                    data: param,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(function (res) {
+                    commonUtil.message(res.data.description);
+
+                }).catch(function (error) {
+                    commonUtil.message(res.data.description);
+                })
+            },
+
+            OnSendMailVerifyCodeBtnClicked() {
+
+                if (this.RegisterFormData.username != "") {
+
+                }
+                if (this.RegisterFormData.password != "") {
+
+                }
+                if (this.RegisterFormData.passwordconfirm != "") {
+
+                }
+                if (this.RegisterFormData.email) {
+
+                }
+
+                if (this.RegisterFormData.password == this.RegisterFormData.passwordconfirm) {
+                }
+
+                this.SendMailBtnClickable = false;
+                this.vaptchaObj.validate();
+
+                this.timer = window.setInterval(() => {
+                    if (this.SendMailVerifyCodeCoolDowm > 0 && this.SendMailVerifyCodeCoolDowm <= 60) {
+                        this.SendMailBtnClickable = false;
+                        this.SendMailVerifyCodeCoolDowm--;
+                        this.content = this.SendMailVerifyCodeCoolDowm + 's后重新获取';
+                    } else {
+                        this.SendMailBtnClickable = true;
+                        clearInterval(this.timer);
+                        this.timer = null;
+                        this.SendMailVerifyCodeCoolDowm = 60;
+                        this.content = "60s后重新获取";
+                    }
+                }, 1000)
+            }
+        }
+    });
+
+</script>
+</html>

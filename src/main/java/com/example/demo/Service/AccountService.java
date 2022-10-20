@@ -1,12 +1,17 @@
 package com.example.demo.Service;
 
 import com.example.demo.Dao.RegisterDao;
+import com.example.demo.DemoApplication;
 import com.example.demo.EmailCodeUtils.EmailCodeProcess;
 import com.example.demo.Entity.AccountEntity;
 import com.example.demo.Error.AccountOperReturn;
 import com.example.demo.Service.ServiceImpl.AccountServiceImpl;
+import com.example.demo.Utils;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class AccountService implements AccountServiceImpl {
@@ -49,7 +54,11 @@ public class AccountService implements AccountServiceImpl {
 
         try {
             if(registerDao.QueryPlayerAcount(account.getUsername()) == null) {
-                registerDao.AddPlayerAcount(account.getUsername(), account.getUsername(), account.getPassword(), account.getEmail());
+                String EncryptedPassword = Utils.GeneratorAuthmeEncryptPassword(account.getPassword());
+                registerDao.AddPlayerAcount(account.getUsername(), account.getUsername(), EncryptedPassword, account.getEmail());
+                MqttMessage msg = new MqttMessage();
+                msg.setPayload("ok...".getBytes(StandardCharsets.UTF_8));
+                DemoApplication.client.publish("Server/RegisterCheck",msg);
                 return new AccountOperReturn(0,"注册成功！");
             }
             else {

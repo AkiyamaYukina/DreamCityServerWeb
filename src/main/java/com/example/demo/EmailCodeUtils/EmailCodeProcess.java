@@ -56,7 +56,6 @@ public class EmailCodeProcess {
             properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
             properties.setProperty("mail.smtp.port", "465");
             Session session = Session.getDefaultInstance(properties);
-            session.setDebug(true);
 
             MimeMessage mimeMessage = new MimeMessage(session);
             mimeMessage.addRecipients(Message.RecipientType.TO, "2152410021@qq.com");//设置收信人

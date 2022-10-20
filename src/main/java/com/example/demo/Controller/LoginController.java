@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
@@ -48,6 +50,7 @@ public class LoginController {
     )
     {
         AccountEntity entity = new AccountEntity(username, password, email);
+
         return accountService.AddAccount(entity);
     }
 

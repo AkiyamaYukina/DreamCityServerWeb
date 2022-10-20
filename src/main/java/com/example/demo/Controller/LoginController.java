@@ -10,12 +10,10 @@ import com.example.demo.Utils;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
@@ -40,24 +38,43 @@ public class LoginController {
         this.sendMailCodeService = service;
     }
 
+    @PostMapping("/reg")
     @RequestMapping(value = "/reg",method = RequestMethod.POST)
     public AccountOperReturn onPlayerLogin(
             @RequestParam("username")String username,
             @RequestParam("password")String password,
             @RequestParam("email")String email,
             @RequestParam("VerifyCode")String verifycode,
-            @RequestParam("whitelist")String whitelist
+            @RequestParam("whitelist")String whitelist,
+            HttpServletRequest request
     )
     {
         AccountEntity entity = new AccountEntity(username, password, email);
-
         return accountService.AddAccount(entity);
     }
 
+    @PostMapping("/sendMailCode")
     @RequestMapping(value = "/sendMailCode",method = RequestMethod.POST)
-    public AccountOperReturn SendMailCode(@RequestParam("email") String useremail)
+    public AccountOperReturn SendMailCode(
+            @RequestParam("username") String username,
+            @RequestParam("email") String useremail,
+            HttpServletRequest request,
+            HttpServletResponse response
+    )
     {
-        AccountEntity entity = new AccountEntity("","",useremail);
+        AccountEntity entity = new AccountEntity(username,"",useremail);
         return sendMailCodeService.SendMailCode(entity);
+    }
+
+    @PostMapping("/login")
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public AccountOperReturn LoginOnWebSite(
+            @RequestParam("username")String username,
+            @RequestParam("password")String password,
+            HttpServletResponse response,
+            HttpServletRequest request)
+    {
+        return null;
+
     }
 }

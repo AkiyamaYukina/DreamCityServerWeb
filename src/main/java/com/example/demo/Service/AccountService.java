@@ -53,13 +53,19 @@ public class AccountService implements AccountServiceImpl {
         }
 
         try {
-            if(registerDao.QueryPlayerAcount(account.getUsername()) == null) {
-                String EncryptedPassword = Utils.GeneratorAuthmeEncryptPassword(account.getPassword());
-                registerDao.AddPlayerAcount(account.getUsername(), account.getUsername(), EncryptedPassword, account.getEmail());
-                MqttMessage msg = new MqttMessage();
-                msg.setPayload("ok...".getBytes(StandardCharsets.UTF_8));
-                DemoApplication.client.publish("Server/RegisterCheck",msg);
-                return new AccountOperReturn(0,"注册成功！");
+            if(registerDao.QueryPlayerAcountByUsername(account.getUsername()) == null) {
+                if(registerDao.QueryPlayerAcountByEmail(account.getEmail()) == null) {
+                    String EncryptedPassword = Utils.GeneratorAuthmeEncryptPassword(account.getPassword());
+                    registerDao.AddPlayerAcount(account.getUsername(), account.getUsername(), EncryptedPassword, account.getEmail());
+                    MqttMessage msg = new MqttMessage();
+                    msg.setPayload(("[服务器注册提醒]\n游戏ID:" + account.getUsername() + "\n白名单申请:").getBytes(StandardCharsets.UTF_8));
+                    DemoApplication.client.publish("Server/RegisterCheck", msg);
+                    return new AccountOperReturn(0, "注册成功！");
+                }
+                else
+                {
+                    return new AccountOperReturn(-1,"邮箱已被注册！");
+                }
             }
             else {
                 return new AccountOperReturn(-1,"账户已存在！");

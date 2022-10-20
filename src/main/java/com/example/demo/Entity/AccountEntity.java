@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import org.springframework.lang.Nullable;
+
 public class AccountEntity {
     private String username;
     private String password;
@@ -10,7 +12,6 @@ public class AccountEntity {
         this.password = password;
         this.email = email;
     }
-
     public String getUsername() {
         return username;
     }
@@ -22,4 +23,5 @@ public class AccountEntity {
     public String getEmail() {
         return email;
     }
+
 }

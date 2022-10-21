@@ -86,4 +86,25 @@ public class AccountService implements AccountServiceImpl {
     public AccountOperReturn UpdateAccount(AccountEntity account) {
         return null;
     }
+
+    @Override
+    public AccountOperReturn LoginAccount(AccountEntity account) {
+        AccountEntity result = registerDao.QueryPlayerAcountByUsername(account.getUsername());
+        if(result == null)
+        {
+            return new AccountOperReturn(-1,"用户名不存在!");
+        }
+        else
+        {
+            String password = result.getPassword();
+            if(password.equalsIgnoreCase("$SHA$" + password.split("\\$")[2] + "$" + Utils.getSHA256StrJava(Utils.getSHA256StrJava(account.getPassword())+password.split("\\$")[2])))
+            {
+                return new AccountOperReturn(0,"登录成功!");
+            }
+            else
+            {
+                return new AccountOperReturn(-1,"密码不一致!");
+            }
+        }
+    }
 }

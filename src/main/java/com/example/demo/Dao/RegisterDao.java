@@ -14,6 +14,7 @@ public interface RegisterDao {
 
     @Select("SELECT username,password,email FROM authme WHERE email = #{email}")
     AccountEntity QueryPlayerAcountByEmail(@Param("email")String email);
+
     @Insert("INSERT INTO authme (username, realname, password, email) VALUES (#{username},#{realname},#{password},#{email});")
     void AddPlayerAcount(@Param("username")String username, @Param("realname")String realname, @Param("password")String password,@Param("email")String email);
 

@@ -9,4 +9,5 @@ public interface AccountServiceImpl {
     AccountOperReturn AddAccount(AccountEntity account);
     AccountOperReturn DelAccount(AccountEntity account);
     AccountOperReturn UpdateAccount(AccountEntity account);
+    AccountOperReturn LoginAccount(AccountEntity account);
 }

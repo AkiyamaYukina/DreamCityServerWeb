@@ -62,6 +62,7 @@ public class LoginController {
             HttpServletResponse response
     )
     {
+        System.out.println("ok...");
         AccountEntity entity = new AccountEntity(username,"",useremail);
         return sendMailCodeService.SendMailCode(entity);
     }
@@ -74,7 +75,8 @@ public class LoginController {
             HttpServletResponse response,
             HttpServletRequest request)
     {
-        return null;
 
+        AccountEntity entity = new AccountEntity(username,password,"");
+        return accountService.LoginAccount(entity);
     }
 }

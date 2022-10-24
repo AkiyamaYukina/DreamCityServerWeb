@@ -22,16 +22,24 @@
             vertical-align: middle;
             backdrop-filter: blur(5px);
         }
+
+        #loginFrame
+        {
+            background-image: url("img/frame-small.png");
+            background-size: cover;
+            
+        }
     </style>
 
     
 </head>
 
 <body>
-    <div id = "loginFrame" class="shadow-lg p-3 mb-5" style="position:absolute;left: 50%;top: 30%;margin: -100px 0 0 -200px;border-radius: 10px; width: 400px; height: 450px; background-color: rgb(255, 255, 255); border-width: 3px;border-color: coral;">
-        <form class="form-signin" action="" method="post" target="the_iframe">
-            <img class="mb-4" src="img/logo.jpg" alt="" width="72" height="72">
-            <span><a style="font-size: 20px;"><strong>梦想之都官网登录/游戏内注册</strong></a></span>
+    <div id = "loginFrame" class="shadow-lg p-3 mb-5" style="position:absolute;left: 50%;top: 30%;margin: -100px 0 0 -200px;border-radius: 10px; width: 400px; height: 620px; background-color: rgb(255, 255, 255); border-width: 3px;border-color: coral;">
+        <form class="form-signin" action="" method="post" target="the_iframe" style="margin-top: 130px;width: 300px;margin-left: 35px;">
+
+            <span><a style="font-size: 20px;float: right;"><strong>欢迎来到木</strong></a></span>
+
             <h1 class="h5 mb-3" style="color: rgb(0, 0, 0);"><strong></strong></h1>
             <label for="inputEmail" class="sr-only">Username</label>
             <input v-model="userInfo.username" type="text" id="inputEmail" class="form-control" placeholder="注册时邮箱/服务器ID" required autofocus style="margin-bottom: 25px;">
@@ -90,7 +98,6 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 }).then(function(res){
-                    console.log(res)//错误处理 相当于error
                     if(res.data.code == 0)
                     {
                         window.location.href = "index.html"

@@ -27,18 +27,23 @@
             z-index: 2;
 
         }
+
+        #loginFrame
+        {
+            background-image: url("img/frame-big.png");
+            background-size: cover;
+            
+        }
     </style>
 
     
 </head>
 
 <body>
-    <div id = "loginFrame" class="shadow-lg p-3 mb-5" style="z-index:300;position:absolute;left: 50%;top: 30%;margin: -250px 0 0 -250px;border-radius: 10px; width: 500px; height: 850px; background-color: rgb(255, 255, 255); border-width: 3px;border-color: coral;">
-        
-        <form class="form-signin" action="" method="post" target="the_iframe">
-            
-            <img class="mb-4" src="img/logo.jpg" alt="" width="72" height="72">
-            <span><a style="font-size: 20px;"><strong>梦想之都服务器注册</strong></a></span>
+    <div id = "loginFrame" class="shadow-lg p-3 mb-5" style="position:absolute;left: 50%;top: 12%;margin: -100px 0 0 -250px;border-radius: 10px; width: 500px; height: 900px; background-color: rgb(255, 255, 255); border-width: 3px;border-color: coral;">
+        <form class="form-signin" action="" method="post" target="the_iframe" style="margin-top: 150px;width: 400px;margin-left: 35px;">
+
+            <span><a style="font-size: 20px;float: right;"><strong>梦想之都服务器注册</strong></a></span>
             <h1 class="h5 mb-3" style="color: rgb(0, 0, 0);"><strong></strong></h1>
 
             <input v-model="RegisterFormData.username" type="text" class="form-control" placeholder="服务器内游戏ID" autofocus style="margin-bottom: 25px;">
@@ -57,7 +62,7 @@
             
             <textarea v-model="RegisterFormData.WhiteListReson" class="form-control" rows="5" placeholder="1.注意！&#13;&#10;2.白名单验证陈述，注册提交后由官方群内管理员审核即可通过注册...&#13;&#10;3.在等待验证过程中，请务必加入官方群内&#13;&#10;4.官方群号:471621813"></textarea>
 
-            <button class="btn btn-lg btn-warning btn-block" type="submit" style="opacity:0.8;width: 50%;margin: 60px auto;" @click = "demo">注册</button>
+            <button class="btn btn-lg btn-warning btn-block" type="submit" style="opacity:0.8;width: 50%;margin: 20px auto;" @click = "demo">注册</button>
 
             <p class="mt-5 mb-3 " style="color: rgb(0, 0, 0);"><strong>&copy; 2015 - 2022</strong></p>
 
